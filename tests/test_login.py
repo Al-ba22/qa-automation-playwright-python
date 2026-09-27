@@ -15,3 +15,12 @@ def test_invalid_login(page: Page):
     expect(page.get_by_role("alert")).to_contain_text(
         "Username and password do not match"
             )
+
+def test_locked_out_user_login(page: Page):
+    page.goto("https://www.saucedemo.com/")
+    page.get_by_placeholder("Username").fill("locked_out_user")
+    page.get_by_placeholder("Password").fill("secret_sauce")
+    page.get_by_role("button", name="Login").click()
+    expect(page.get_by_role("alert")).to_contain_text(
+        "Sorry, this user has been locked out."
+    )
