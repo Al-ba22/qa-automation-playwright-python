@@ -15,3 +15,13 @@ class InventoryPage:
             "button",
             name="Add to cart"
         ).click()
+
+    def remove_product_from_cart(self, product_name: str):
+        product_card = self.page.locator(
+        '[data-test="inventory-item"]'
+        ).filter(has_text=product_name)
+
+        product_card.get_by_role(
+        "button",
+        name="Remove"
+        ).click()
